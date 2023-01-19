@@ -1,5 +1,6 @@
 import os
 import secrets
+from datetime import datetime
 import urllib.request, urllib.parse
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, redirect, render_template, url_for,request,jsonify,get_flashed_messages
@@ -13,6 +14,8 @@ Flask,g,redirect,render_template,request,session,url_for,flash,jsonify
 )
 from flask_cors import CORS
 #from flask_uploads import UploadSet,IMAGES, configure_uploads
+
+
 
 
 
@@ -154,6 +157,7 @@ class User(db.Model,UserMixin):
     health= db.Column(db.String()    )
     extra= db.Column(db.String()     )
     image_file = db.Column(db.String(20))
+    
     def __repr__(self):
         return f"User('{self.id}', {self.fullname}, {self.gender}'"
     
@@ -200,14 +204,18 @@ def dashboard():
 def getstudent():
     return render_template('getstudent.html')
 
-@app.route('/chat')
+@app.route('/')
 def chat():
     return render_template('chat.html')
 
+@app.route("/time")
+def time():
+    date = datetime.now()
+    return str(date)
 
 
 @app.route('/addalumni', methods=['GET', 'POST'])
-@login_required
+
 def addalumni():
     form=Adduser()
     if form.validate_on_submit():
@@ -233,7 +241,7 @@ def addalumni():
        
             db.session.add(new)
             db.session.commit()
-            flash("Someone just dropme", "success")
+            flash("Attendance Verified", "success")
             return redirect('/userbase')
     print(form.errors)
     return render_template("addAlumni.html", form=form, title='addalumni')
@@ -650,8 +658,23 @@ def login():
 @app.route('/login', methods=['POST','GET'])
 def login():
     form = LoginForm()
-  
-   
+    print ('try')
+    print(form.email.data)
+    print(form.password.data)
+    
+    if form.validate_on_submit():
+        print("form Validated successfully")
+        user = Person.query.filter_by(email = form.email.data).first()
+        print("user:" + user.email + "found")
+        print(user.password)
+        if user and form.password.data == user.password:
+            print(user.email + "validored successfully")
+            login_user(user)
+           # flash (f' ' + user.email + ',You have been logged in successfully ' ,'success')
+            return redirect(url_for('userbase'))
+            # next = request.args.get('next')
+        else:
+            flash (f'The account cant be found', 'success')
     return render_template('login.html', form=form)
  
 
@@ -708,7 +731,7 @@ def usersignup():
     return render_template('usersignup.html', form=form)
    
 
-@app.route('/', methods=['POST','GET'])
+@app.route('/userlogin', methods=['POST','GET'])
 def ulogin():
     form = LoginForm()
     print ('try')
@@ -781,13 +804,13 @@ def userdisplay(userid):
 
 
 @app.route('/userbase')
-@login_required
+
 def userbase():
     print("Fetching all")
     users=User.query.order_by(User.id.desc()).all()
     print(users)
     print(current_user)
-    return render_template("userbase.html", users=users, current_user=current_user, header="Information Technology", smalltitle="2021", name="- CCSITA", numberofentries="16 entries")
+    return render_template("userbase.html", users=users, current_user=current_user, header="Information Technology", smalltitle="2021", name="- CCSITA", numberofentries="16 entries", datetime = str(datetime.now()))
  
 
   

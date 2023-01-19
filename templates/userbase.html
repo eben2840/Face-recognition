@@ -6,12 +6,13 @@
 
   
 {% block body %}
-<nav class="navbar bg-success fixed-top">
+<nav class="navbar fixed-top" style="background-color:rgb(31, 101, 194); ">
   <div class="container-fluid">
-    <h5 style=" color: #5454c9; padding:8px; color:#000;" ><b>Dropme<img src="static/img/dow.png"  alt=""style="width:10px; margin-left:5px; height:10px;"  ><b> </h5>
-      <h5 style=" color: #5454c9; padding:8px; color:#000; margin-right:10px;" > <a href="/addalumni" style="color:#000;"><img src="static/img/app.png" style="width:25px; margin-left:20px;"></a><a href="/chat"><img src="static/img/pp.png"  alt=""style="width:25px; margin-left:20px; height:25px;"  ></a></h5>
+    <h5 style=" color: #5454c9; padding:8px; color:#fff;" ><b>Students Attendance <b> </h5>
+      <a href="https://docs.google.com/spreadsheets/u/0/?tgif=d" style="color:#000;"> <img src="static/img/doo.png"  alt=""style="width:25px; height:25px;"> </a>
   </div>
 </nav>
+
 
 {% with messages = get_flashed_messages() %}
 {% if messages %}
@@ -25,51 +26,25 @@
 {% endif %}
 {% endwith %}
 
-<div class="contain" style=" padding: 5px; margin-top:70px; display:flex; overflow:auto;">
-{%for user in users%} 
-<img src="{{user.image_file}} "  alt=""style="width:80px; object-fit:cover;   box-shadow: rgba(90, 90, 90, 0.2) 0px 1px 1px; padding:5px; margin:5px; border-radius:50px; height:80px;;"  > 
-{% endfor %}
-</div>
-
-<div class="container" style="+border-radius:10px 0 0 150px; padding: 10px; ">
+<div class="container" style="padding:30px; margin-top:39px;">
   {%for user in users%} 
- 
-<div class="ade" style="  padding:20px;  margin-bottom:20px; ">
-    <div class="ade"style="display: flex;  ">
-      <img src="static/img/test.png" style="width:40px; height:40px; margin-bottom:5px;">
-      <h6 style="color:#000; text-align:left; margin-left:6px; "><b>{{user.guardian}} <img src="static/img/check.png" style="width:10px;"></b> <br>#{{user.work}}. <span class="text-muted" style="font-size:13px;">2 min.</span> </h6>
+  <div class="row" style="margin-top:10px; padding:10px;">
+    
+      <div class="hero" style="display:grid;  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+        <img src="{{user.image_file}} "  alt="" style="width:40px; object-fit:cover;  border-radius:10px; height:40px;margin-top:10px;"  > 
+        <h6>{{user.guardian}}<img src="static/img/check.png" style="width:10px; margin-left:5px;"></h6>
+        
+        <div class="hero" style="display:flex; justify-content:space-between;  ">
+            <h6 class="text-muted">{{user.fullname}}</h6>
+          <h6 class="text-muted" style="font-size:12px;"> {{ datetime }}</h6>
+      </div>
     </div>
-  
-<div class="ade"style=" background-color: #b2becc; background-color: #fff; border-radius:10px;"> 
-  <a href="" style="text-decoration: none;  text-align:center; color: #fff;">
-    <img src="{{user.image_file}} "  alt=""style="width:320px; object-fit:cover;  border-radius:10px; height:350px;;"  > 
-  </a>
-  
 
-  <div class="ade"style="display: flex; justify-content: space-between;margin-top:10px;  "> 
-      <a href="" style="text-decoration: none;  text-align:center; color: #000;">
-     <ion-icon style="font-size:30px;" name="heart-outline">
-    </a>
-    <!--    <img src="static/img/no.png"  alt=""style="width:25px; height:25px;"  > -->
-    <img src="static/img/doo.png"  alt=""style="width:25px; height:25px;"  > 
-   
+
+    
   </div>
-  <h6 class="text-muted">View all comment</h6>
-    <h6 style="color:#000; text-align:left; margin-left:10px; margin-top:10px; margin-bottom:20px; "><b>{{user.guardian}}</b>  {{user.fullname}}...</h6>
-</div>
-
-  <h6 class="text-muted" style="color: #000; text-align:left;">Discover dropmes near you</h6>
-  <h6  style="color: #000; background-color:rgb(72, 239, 164); text-align:center; margin:auto; padding:10px; width:300px; border-radius:30px;">See other dropmes</h6>
-  
-</div>
-</div>
-
-{% endfor %}
-</div>
-
-</div>
-
-
+  {% endfor %}  
+      </div>
 
 
 
@@ -77,6 +52,15 @@
 {% endblock body %}
   
    
+
+
+
+
+
+
+
+
+
 
 
 

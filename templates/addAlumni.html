@@ -2,14 +2,8 @@
   {% extends 'layout.html' %}
 {% block body %}
 
-<nav class="navbar bg-success fixed-top">
-  <div class="container-fluid">
-    <h5 style=" color: #5454c9; padding:8px; color:#000;" ><b><a href="/userbase"><img src="static/img/left.png"  alt=""style="width:20px; margin-left:5px; height:20px;"  ><b> </a></h5>
-      <h5 style=" color: #5454c9; padding:8px; color:#000; margin-right:10px;" > <a href="/addalumni" style="color:#000;"><img src="static/img/app.png" style="width:25px; margin-left:20px;"><img src="static/img/pp.png"  alt=""style="width:25px; margin-left:20px; height:25px;"  ></a></h5>
-  </div>
-</nav>
+<a href="/"> <img src="static/img/left.png" style="width:20px; margin-top:20px; margin-bottom:15px:"></a>
 
-<div class="container">
 
 
 <br>
@@ -21,33 +15,33 @@
         {% if editCandidate %}
         <img id="image-preview" style="height: 30vh; width:320px; object-fit:contain" src={{candidate.testField}} alt="your image" />
         {% else %}
-        <img id="image-preview" style="height: 30vh; object-fit:contain; width:320px;" src="{{url_for('static', filename='img/mee.png')}}" alt="your image" />
+        <img id="image-preview" style="height: 30vh; object-fit:contain; width:330px;" src="{{url_for('static', filename='img/alexx.gif')}}" alt="your image" />
         {% endif %}
     </div>      
     <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
 </label>
-<h6 class="text-muted">Tap on the image above to add a dropme:</h6>
+<h6 class="text-muted" style="font-size:15px; margin-top:20px;">Tap on the image to take a photo of you in class:</h6>
 <input style="display:none" id="image-picker" type="file" required="required" accept="image/*" />
 
 <div class="form-floating mb-3">
   {{form.guardian(class="form-control",placeholder="INT/19/01/5837",id="floatingInput")}}
-  <label for="floatingInput" class="text-muted">Username</label>
+  <label for="floatingInput" class="text-muted">Fullname</label>
 </div>
 
 <div class="form-floating mb-3" >
   {{form.fullname(class="form-control",placeholder="Assignment",id="floatingInput")}}
-  <label for="floatingInput" class="text-muted">Comments</label>
+  <label for="floatingInput" class="text-muted">IndexNumber</label>
 </div>
 
 
+
+
+
+<button class="btn" style="color: #fff; margin-bottom:1000px; background:blue; margin-left:120px;   border: none;" type="submit" id="submitButton">Verify Student</button>
 <div class="form-floating mb-3">
   {{form.work(class="form-control",placeholder="Days Left",id="floatingInput")}}
-  <label for="floatingInput" class="text-muted">Leave a Hashtag</label>
-</div>
-
-
-<button class="btn" style="color: #fff; margin-bottom:1000px; background: #631AAC;   border: none;" type="submit" id="submitButton">Add Drop</button>
-          
+  <label for="floatingInput" class="text-muted">Time</label>
+</div>          
 
   <div class="form-floating mb-3">
     {{form.indexnumber(class="form-control",placeholder="Date Assigned",id="floatingInput" )}}
